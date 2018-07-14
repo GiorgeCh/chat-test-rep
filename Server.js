@@ -3,6 +3,11 @@
 var WebSocket = require('ws');
 var outPort = 8080;
 
+var http = require('http');
+var httpserver = http.createServer();
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 var clientsList ={};
 var connectedClientsList = {};
 var connectionIDCounter = 0;
@@ -11,7 +16,11 @@ var colors = ["AliceBlue","Aqua","Aquamarine","Azure","Beige","Bisque","Black","
 //-----------------------------------------------------
 //WebSocket server
 var WebSocketServer = WebSocket.Server;
-var wsServer = new WebSocketServer({port: outPort});
+
+//test
+var wsServer = new WebSocketServer({server:httpserver});
+httpserver.listen(server_port,server_ip_address);
+//var wsServer = new WebSocketServer({port: outPort});
 console.log("Server is Open, connected to webSocket on port : " +outPort);
 
 wsServer.on("connection", function(_connection) {
