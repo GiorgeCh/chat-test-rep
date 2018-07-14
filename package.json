@@ -1,9 +1,10 @@
 {
-  "scripts": {
-  "start": "node Server.js"
+	"scripts": {
+		"start": "node Server.js"
 	},
-  "dependencies": {
-    "ws" : "0.5.22"
+	"dependencies": {
+		"ws" : "0.5.22"
 	},
-  "main": "Server.js"
+	"private": true,
+	"main": "Server.js"
 }
