@@ -3,7 +3,11 @@
 		"start": "node Server.js"
 	},
 	"dependencies": {
-		"ws" : "0.5.22"
+		"ws" : "0.4.31"
+	},
+	"engines": {
+		"node": ">= 0.6.0",
+		"npm": ">= 1.0.0"
 	},
 	"private": true,
 	"main": "Server.js"
