@@ -3,11 +3,16 @@
 var WebSocket = require('ws');
 var outPort = 8080;
 //test
-//var http = require('http');
-//var httpserver = http.createServer();
+var http = require('http');
+var httpserver = http.createServer(function(request, response) {
+    console.log((new Date()) + ' Received request for ' + request.url);
+	response.writeHead(200, {'Content-Type': 'text/plain'});
+	  response.write("Welcome to Node.js on OpenShift!\n\n");
+	  response.end("Thanks for visiting us! \n");
+});
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-
+//end test
 var clientsList ={};
 var connectedClientsList = {};
 var connectionIDCounter = 0;
@@ -18,9 +23,9 @@ var colors = ["AliceBlue","Aqua","Aquamarine","Azure","Beige","Bisque","Black","
 var WebSocketServer = WebSocket.Server;
 
 //test
-//var wsServer = new WebSocketServer({server:httpserver});
-//httpserver.listen(server_port,server_ip_address);
-var wsServer = new WebSocketServer({port: server_port});
+httpserver.listen(server_port,server_ip_address);
+var wsServer = new WebSocketServer({server:httpserver});
+//var wsServer = new WebSocketServer({port: server_port});
 //var wsServer = new WebSocketServer({port: outPort});
 console.log("Server is Open, connected to webSocket on port : " +outPort);
 
